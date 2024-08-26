@@ -1,0 +1,10 @@
+---
+- hosts: proxmox
+  tasks:
+    - name: del previous snapshot
+      shell: pct delsnapshot "{{item}}" auto_snapshot
+      loop: "{{range(101,137)| list}}"
+    - name: create all snapshoot to all SIJA A CT
+      shell:
+        cmd: pct snapshot "{{item}}" auto_snapshot --description "snapshoot di buat otomatis pada pukul 00:00"
+      loop: "{{range(101,137)| list}}"
